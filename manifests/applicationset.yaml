@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: aplicacoes
+  name: aplicacoes-prod
   namespace: argo
 spec:
   goTemplate: true
@@ -11,10 +11,10 @@ spec:
       repoURL: https://github.com/bernardolsp/aula-bonde-rs.git
       revision: HEAD
       directories:
-      - path: ambiente-de-dev/*
+      - path: ambiente-de-prod/*
   template:
     metadata:
-      name: '{{index .path.segments 1}}'
+      name: '{{index .path.segments 1}}-prod'
     spec:
       project: "default"
       source:
@@ -23,7 +23,7 @@ spec:
         path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{index .path.segments 1}}'
+        namespace: '{{index .path.segments 1}}-prod'
       syncPolicy:
         automated: {}
         syncOptions:
