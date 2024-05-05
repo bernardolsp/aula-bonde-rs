@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/bernardolsp/aula-bonde-rs/'
+    path: ambiente-de-dev/giropops-senhas
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: giropops-senhas
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
