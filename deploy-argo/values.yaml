@@ -1,0 +1,23 @@
+nameOverride: argocd
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: cloudflare-tunnel
+    hostname: argocd.bernardolopes.com
+    path: /
+
+applicationSet:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: cloudflare-tunnel
+    hostname: applicationset.bernardolopes.com
+    path: /
+
+configs:
+  params:
+    server.insecure: true
+  cm:
+    url: https://argocd.bernardolopes.com
+
